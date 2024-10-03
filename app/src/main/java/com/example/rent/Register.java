@@ -53,9 +53,9 @@ public class Register extends AppCompatActivity {
                             reference.child(phoneText).child("name").setValue(nameText);
                             reference.child(phoneText).child("password").setValue(passwordText);
                             reference.child(phoneText).child("email").setValue(emailText);
-                            reference.child(phoneText).child("electricityBill").setValue(0);
-                            reference.child(phoneText).child("rent").setValue(0);
-                            reference.child(phoneText).child("total").setValue(0);
+                            reference.child(phoneText).child("electricityBill").setValue("0");
+                            reference.child(phoneText).child("rent").setValue("0");
+                            reference.child(phoneText).child("total").setValue("0");
                             Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         }
                     }

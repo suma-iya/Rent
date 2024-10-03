@@ -14,7 +14,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private final List<MyItems> items;
     private final Context context;
 
-    // Constructor to initialize the adapter with the list of items and context
     public MyAdapter(List<MyItems> items, Context context) {
         this.items = items;
         this.context = context;
@@ -23,8 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout for each item and pass it to the ViewHolder
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_adapter_layout, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.recyclerview_adapter_layout, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -33,30 +31,38 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         MyItems currentItem = items.get(position);
 
         // Log item details for debugging
-        Log.d("MyAdapter", "Item at position " + position + ": " + currentItem.getFullName());
+        Log.d("MyAdapter", "Item at position " + position + ": " +
+                "Full Name: " + currentItem.getFullName() +
+                ", Phone: " + currentItem.getMobile() +
+                ", Email: " + currentItem.getEmail() +
+                ", Electricity Bill: " + currentItem.getElectricityBill() +
+                ", Rent: " + currentItem.getRent() +
+                ", Total: " + currentItem.getTotal());
 
         holder.fullName.setText(currentItem.getFullName());
         holder.mobile.setText(currentItem.getMobile());
         holder.email.setText(currentItem.getEmail());
+        holder.electricityBill.setText(currentItem.getElectricityBill());
+        holder.rent.setText(currentItem.getRent());
+        holder.total.setText(currentItem.getTotal());
     }
-
 
     @Override
     public int getItemCount() {
-        return items.size(); // Return the size of the item list
+        return items.size();
     }
 
-    // ViewHolder class to hold references to the views for each item
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final TextView fullName, mobile, email;
+        private final TextView fullName, mobile, email, electricityBill, rent, total;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Initialize the TextViews by finding them in the inflated view
             fullName = itemView.findViewById(R.id.userName);
             mobile = itemView.findViewById(R.id.userPhone);
             email = itemView.findViewById(R.id.userEmail);
-
+            electricityBill = itemView.findViewById(R.id.userElectricityBill);
+            rent = itemView.findViewById(R.id.userRent);
+            total = itemView.findViewById(R.id.userTotal);
         }
     }
 }
