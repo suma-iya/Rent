@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
 
         // Initialize the adapter here
-        adapter = new MyAdapter(items, MainActivity.this);
+        adapter = new MyAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
         recyclerView.setAdapter(adapter);
 
         // Get the phone number of the logged-in user
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Create formatted strings to show user data
                         if (fullName != null && mobile != null) {
-                            items.add(new MyItems("Name: " + fullName, "Phone: " + mobile, "Email: " + email, "Electricity Bill: " + electricityBill, "Rent: " + rent, "Total: " + total));
+                            items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total));
                         }
                     }
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add the user's data to the list
                     if (fullName != null) {
-                        items.add(new MyItems("Name: " + fullName, "Phone: " + mobile, "Email: " + email, "Electricity Bill: " + electricityBill, "Rent: " + rent, "Total: " + total));
+                        items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total));
                     }
 
                     // Notify the adapter that the data has changed
