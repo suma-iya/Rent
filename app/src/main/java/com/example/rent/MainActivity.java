@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter adapter;
 
 
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
 
         // Initialize the adapter here
+
         adapter = new MyAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
         recyclerView.setAdapter(adapter);
 
@@ -66,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
                         String electricityBill = dataSnapshot.child("electricityBill").exists() ? dataSnapshot.child("electricityBill").getValue(String.class) : "0";
                         String rent = dataSnapshot.child("rent").exists() ? dataSnapshot.child("rent").getValue(String.class) : "0";
                         String total = dataSnapshot.child("total").exists() ? dataSnapshot.child("total").getValue(String.class) : "0";
-
+                        String password = dataSnapshot.child("password").exists() ? dataSnapshot.child("password").getValue(String.class) : "N/A";
                         // Create formatted strings to show user data
                         if (fullName != null && mobile != null) {
-                            items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total));
+                            items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total, password));
                         }
                     }
 
@@ -96,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
                     String electricityBill = dataSnapshot.child("electricityBill").exists() ? dataSnapshot.child("electricityBill").getValue(String.class) : "0";
                     String rent = dataSnapshot.child("rent").exists() ? dataSnapshot.child("rent").getValue(String.class) : "0";
                     String total = dataSnapshot.child("total").exists() ? dataSnapshot.child("total").getValue(String.class) : "0";
-
+                    String password = dataSnapshot.child("password").exists() ? dataSnapshot.child("password").getValue(String.class) : "N/A";
                     // Add the user's data to the list
                     if (fullName != null) {
-                        items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total));
+                        items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total,password));
                     }
 
                     // Notify the adapter that the data has changed

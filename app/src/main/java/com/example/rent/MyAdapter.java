@@ -55,12 +55,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 ", Rent: " + currentItem.getRent() +
                 ", Total: " + currentItem.getTotal());
 
-        holder.fullName.setText(currentItem.getFullName());
-        holder.mobile.setText(currentItem.getMobile());
-        holder.email.setText(currentItem.getEmail());
-        holder.electricityBill.setText(currentItem.getElectricityBill());
-        holder.rent.setText(currentItem.getRent());
-        holder.total.setText(currentItem.getTotal());
+        holder.fullName.setText("Name  :" + currentItem.getFullName());
+        holder.mobile.setText("Mobile :" + currentItem.getMobile());
+        holder.email.setText("Email :" + currentItem.getEmail());
+        holder.electricityBill.setText("Electricity Bill :" + currentItem.getElectricityBill());
+        holder.rent.setText("Rent :" + currentItem.getRent());
+        holder.total.setText("Due :" + currentItem.getTotal());
+        holder.password.setText("Password:" + currentItem.getPassword());
 
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +81,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 EditText electricityBill = view.findViewById(R.id.txtElectricityBill);
                 EditText rent = view.findViewById(R.id.txtRent);
                 EditText total = view.findViewById(R.id.txtTotal);
+                EditText password = view.findViewById(R.id.txtPassword);
 
                 Button update = view.findViewById(R.id.update);
                 fullName.setText(currentItem.getFullName());
@@ -88,6 +90,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 electricityBill.setText(currentItem.getElectricityBill());
                 rent.setText(currentItem.getRent());
                 total.setText(currentItem.getTotal());
+                password.setText(currentItem.getPassword());
 
                 dialog.show();
 
@@ -100,6 +103,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         String updatedElectricityBill = electricityBill.getText().toString();
                         String updatedRent = rent.getText().toString();
                         String updatedTotal = total.getText().toString();
+                        String updatedPassword = password.getText().toString();
 
                         // Prepare the map to update the data in Firebase
                         Map<String, Object> map = new HashMap<>();
@@ -108,6 +112,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                         map.put("electricityBill", updatedElectricityBill);
                         map.put("rent", updatedRent);
                         map.put("total", updatedTotal);
+                        map.put("password", updatedPassword);
 
                         // Update Firebase data
                         FirebaseDatabase.getInstance().getReference("users")
@@ -121,6 +126,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                                         currentItem.setElectricityBill(updatedElectricityBill);
                                         currentItem.setRent(updatedRent);
                                         currentItem.setTotal(updatedTotal);
+                                        currentItem.setPassword(updatedPassword);
 
                                         // Notify the adapter about the change
                                         notifyItemChanged(position);
@@ -154,7 +160,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 builder.setPositiveButton("Yes", (dialog, which) -> {
                     // Delete the user data from Firebase
                     FirebaseDatabase.getInstance().getReference("users")
-                            .child(currentItem.getMobile().substring(6))  // Assuming phone number is the key
+                            .child(currentItem.getMobile())    // Assuming phone number is the key
                             .removeValue()
                             .addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
@@ -189,7 +195,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final TextView fullName, mobile, email, electricityBill, rent, total;
+        private final TextView fullName, mobile, email, electricityBill, rent, total, password;
 
         Button btnEdit, btnDelete;
         public MyViewHolder(@NonNull View itemView) {
@@ -200,6 +206,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             electricityBill = itemView.findViewById(R.id.userElectricityBill);
             rent = itemView.findViewById(R.id.userRent);
             total = itemView.findViewById(R.id.userTotal);
+            password = itemView.findViewById(R.id.userPassword);
 
             btnEdit = (Button)itemView.findViewById(R.id.edit);
             btnDelete = (Button) itemView.findViewById(R.id.delete);

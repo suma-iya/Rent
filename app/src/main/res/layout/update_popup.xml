@@ -128,6 +128,27 @@
         android:padding="10dp"
         android:gravity="center"
         android:id="@+id/txtTotal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:inputType="textPassword"
+        android:background="@drawable/border"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:id="@+id/txtPassword"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

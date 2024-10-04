@@ -2,20 +2,22 @@ package com.example.rent;
 
 public class MyItems {
     private String fullName;
-    private final String mobile;
+    private String mobile;
     private String email;
     private String electricityBill;
     private String rent;
     private String total;
+    private  String password;
 
 
-    public MyItems(String fullName, String mobile, String email, String electricityBill, String rent, String total){
+    public MyItems(String fullName, String mobile, String email, String electricityBill, String rent, String total, String password){
         this.fullName = fullName;
         this.mobile = mobile;
         this.email = email;
         this.electricityBill = electricityBill;
         this.rent = rent;
         this.total = total;
+        this.password = password;
     }
     public String getFullName() {
         return fullName;
@@ -36,6 +38,10 @@ public class MyItems {
     }
     public String getTotal() {
         return total;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setFullName(String updatedName) {
@@ -60,5 +66,13 @@ public class MyItems {
     public void setTotal(String updatedTotal) {
         // Update the total
         total = updatedTotal;
+    }
+    public void setPassword(String updatedPassword) {
+        // Update the password
+        password = updatedPassword;
+    }
+    public void setMobile(String updatedMobile) {
+        // Update the mobile
+        mobile = updatedMobile;
     }
 }

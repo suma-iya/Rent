@@ -57,11 +57,21 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:id="@+id/userTotal"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="password"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/userPassword"/>
+
+
             <LinearLayout
                 android:layout_below="@id/userTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
 
                 <Button
                     android:layout_width="150dp"
