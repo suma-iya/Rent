@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
     private final List<MyItems> items = new ArrayList<>();
-    private static final String ADMIN_PHONE_NUMBER = "01537617361";  // Replace with your admin's phone number
+    private static final String ADMIN_PHONE_NUMBER = "0123456789";  // Replace with your admin's phone number
     private String loggedInUserPhoneNumber;  // Store the logged-in user's phone number
 
     public RecyclerView recyclerView;
 
-    private MyAdapter adapter;
+
 
 
 
@@ -48,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the adapter here
 
-        adapter = new MyAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
-        recyclerView.setAdapter(adapter);
+
 
         // Get the phone number of the logged-in user
         loggedInUserPhoneNumber = getIntent().getStringExtra("PHONE_NUMBER");
 
         if (loggedInUserPhoneNumber.equals(ADMIN_PHONE_NUMBER)) {
             // Fetch all users' data for admin
+
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
                             items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total, password));
                         }
                     }
+                    MyAdapter adapter = new MyAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
 
+                    recyclerView.setAdapter(adapter);
                     // Notify the adapter that the data has changed
                     adapter.notifyDataSetChanged();
                 }
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             // Fetch only the logged-in user's data
+
             reference.child(loggedInUserPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                         items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total,password));
                     }
 
+                    UserAdapter adapter = new UserAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
+                    recyclerView.setAdapter(adapter);
                     // Notify the adapter that the data has changed
                     adapter.notifyDataSetChanged();
                 }

@@ -1,3 +1,4 @@
+
 package com.example.rent;
 
 import android.annotation.SuppressLint;
@@ -66,7 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 //Implement the edit functionality here
+                //Implement the edit functionality here
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Edit User Data");
                 View view = LayoutInflater.from(context).inflate(R.layout.update_popup, null);
@@ -158,16 +159,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 builder.setTitle("Delete User Data");
                 builder.setMessage("Are you sure you want to delete this user?");
                 builder.setPositiveButton("Yes", (dialog, which) -> {
+
                     // Delete the user data from Firebase
                     FirebaseDatabase.getInstance().getReference("users")
                             .child(currentItem.getMobile())    // Assuming phone number is the key
                             .removeValue()
+
                             .addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     // Remove the item from the list and notify the adapter
-                                    items.remove(position);
-                                    notifyItemRemoved(position);
-                                    notifyItemRangeChanged(position, items.size());  // Notify that the range of items has changed
+                                    if(position >= 0 && position < items.size()) {
+                                        items.remove(position);
+                                        notifyItemRemoved(position);
+                                        notifyItemRangeChanged(position, items.size());
+                                    }// Notify that the range of items has changed
                                     Log.d("MyAdapter", "User data deleted successfully");
                                     Toast.makeText(context, "User data deleted successfully", Toast.LENGTH_SHORT).show();
                                 } else {
