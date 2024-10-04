@@ -21,49 +21,49 @@
                 android:text="User Name"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userName"/>
+                android:id="@+id/newuserName"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="User Email"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userEmail"/>
+                android:id="@+id/newuserEmail"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="User Phone"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userPhone"/>
+                android:id="@+id/newuserPhone"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Electricity Bill"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userElectricityBill"/>
+                android:id="@+id/newuserElectricityBill"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Rent"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userRent"/>
+                android:id="@+id/newuserRent"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userTotal"/>
+                android:id="@+id/newuserTotal"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="password"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:id="@+id/userPassword"/>
+                android:id="@+id/newuserPassword"/>
 
 
             <LinearLayout
@@ -77,14 +77,10 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Edit"
+                    android:layout_marginLeft="100dp"
                     android:layout_marginRight="5dp"
-                    android:id="@+id/edit"/>
-                <Button
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Delete"
-                    android:layout_marginLeft="5dp"
-                    android:id="@+id/delete"/>
+                    android:gravity="center"
+                    android:id="@+id/newedit"/>
 
             </LinearLayout>
 

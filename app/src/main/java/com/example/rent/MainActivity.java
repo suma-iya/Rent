@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
     private final List<MyItems> items = new ArrayList<>();
-    private static final String ADMIN_PHONE_NUMBER = "01537617361";  // Replace with your admin's phone number
+    private static final String ADMIN_PHONE_NUMBER = "0123456789";  // Replace with your admin's phone number
     private String loggedInUserPhoneNumber;  // Store the logged-in user's phone number
 
     public RecyclerView recyclerView;
 
-    private MyAdapter adapter;
+
+
 
 
     @Override
@@ -46,14 +47,15 @@ public class MainActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
 
         // Initialize the adapter here
-        adapter = new MyAdapter(items, MainActivity.this);
-        recyclerView.setAdapter(adapter);
+
+
 
         // Get the phone number of the logged-in user
         loggedInUserPhoneNumber = getIntent().getStringExtra("PHONE_NUMBER");
 
         if (loggedInUserPhoneNumber.equals(ADMIN_PHONE_NUMBER)) {
             // Fetch all users' data for admin
+
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -66,13 +68,15 @@ public class MainActivity extends AppCompatActivity {
                         String electricityBill = dataSnapshot.child("electricityBill").exists() ? dataSnapshot.child("electricityBill").getValue(String.class) : "0";
                         String rent = dataSnapshot.child("rent").exists() ? dataSnapshot.child("rent").getValue(String.class) : "0";
                         String total = dataSnapshot.child("total").exists() ? dataSnapshot.child("total").getValue(String.class) : "0";
-
+                        String password = dataSnapshot.child("password").exists() ? dataSnapshot.child("password").getValue(String.class) : "N/A";
                         // Create formatted strings to show user data
                         if (fullName != null && mobile != null) {
-                            items.add(new MyItems("Name: " + fullName, "Phone: " + mobile, "Email: " + email, "Electricity Bill: " + electricityBill, "Rent: " + rent, "Total: " + total));
+                            items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total, password));
                         }
                     }
+                    MyAdapter adapter = new MyAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
 
+                    recyclerView.setAdapter(adapter);
                     // Notify the adapter that the data has changed
                     adapter.notifyDataSetChanged();
                 }
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             // Fetch only the logged-in user's data
+
             reference.child(loggedInUserPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,12 +101,14 @@ public class MainActivity extends AppCompatActivity {
                     String electricityBill = dataSnapshot.child("electricityBill").exists() ? dataSnapshot.child("electricityBill").getValue(String.class) : "0";
                     String rent = dataSnapshot.child("rent").exists() ? dataSnapshot.child("rent").getValue(String.class) : "0";
                     String total = dataSnapshot.child("total").exists() ? dataSnapshot.child("total").getValue(String.class) : "0";
-
+                    String password = dataSnapshot.child("password").exists() ? dataSnapshot.child("password").getValue(String.class) : "N/A";
                     // Add the user's data to the list
                     if (fullName != null) {
-                        items.add(new MyItems("Name: " + fullName, "Phone: " + mobile, "Email: " + email, "Electricity Bill: " + electricityBill, "Rent: " + rent, "Total: " + total));
+                        items.add(new MyItems(fullName, mobile,email, electricityBill, rent,total,password));
                     }
 
+                    UserAdapter adapter = new UserAdapter(items, MainActivity.this, loggedInUserPhoneNumber);
+                    recyclerView.setAdapter(adapter);
                     // Notify the adapter that the data has changed
                     adapter.notifyDataSetChanged();
                 }
